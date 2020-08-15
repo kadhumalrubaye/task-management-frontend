@@ -57,7 +57,7 @@ class TasksPage extends Component {
   componentDidMount() {
     this.props.tasksStore.fetchTasks();
   }
-  
+
   handleSignOut = () => {
     const { userStore, tasksStore, routerStore } = this.props;
     userStore.signout();
