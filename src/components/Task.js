@@ -8,6 +8,7 @@ import {
   Select,
   FormControl,
   Grid,
+  TextField,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import styled from "styled-components";
@@ -24,7 +25,11 @@ const CardTitle = styled.h1`
 
 @inject("tasksStore", "routerStore")
 class Task extends Component {
-  state = { update: false };
+  state = {
+    update: false,
+    title: this.props.title,
+    description: this.props.description,
+  };
 
   deleteTask = () => {
     this.props.tasksStore.deleteTask(this.props.id);
@@ -41,6 +46,12 @@ class Task extends Component {
         description: this.state.description,
       };
       this.props.tasksStore.updateTask(this.props.id, updatedTask);
+      this.setState({ update: false });
+      //go to tasks
+    }
+  };
+  cancel = () => {
+    if (this.state.update === true) {
       this.setState({ update: false });
       //go to tasks
     }
@@ -103,19 +114,19 @@ class Task extends Component {
           <Card>
             <CardContent>
               <CardTitle>
-                <textarea
+                <TextField
                   value={this.state.title}
                   onChange={this.handelOnTitleChange}
                 >
                   {title}
-                </textarea>
+                </TextField>
               </CardTitle>
-              <textarea
+              <TextField
                 value={this.state.description}
                 onChange={this.handelOnDescriptionChange}
               >
                 {description}
-              </textarea>
+              </TextField>
             </CardContent>
             <CardActions style={{ padding: "14px" }} disableSpacing>
               <Grid
@@ -127,6 +138,7 @@ class Task extends Component {
                     <DeleteIcon color="error" />
                   </IconButton>
                   <IconButton onClick={this.saveChanges}>save</IconButton>
+                  <IconButton onClick={this.cancel}>Cancel</IconButton>
                 </Grid>
               </Grid>
             </CardActions>
