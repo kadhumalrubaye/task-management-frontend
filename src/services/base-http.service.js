@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default class BaseHttpService {
-  BASE_URL = 'https://mightyk.herokuapp.com';
+  BASE_URL = 'http://localhost:3000';
   _accessToken = null;
 
   constructor(routerStore) {
