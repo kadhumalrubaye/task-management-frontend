@@ -9,6 +9,7 @@ import {
   FormControl,
   Grid,
   TextField,
+  Backdrop,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import styled from "styled-components";
@@ -67,13 +68,13 @@ class Task extends Component {
   };
 
   render() {
-    const { title, description } = this.props;
+    const { title, description, status } = this.props;
 
     // const [update] = this.state;
     if (this.state.update === false) {
       return (
         <CardContainer>
-          <Card>
+          <Card style={{ background: status === "DONE" ? "#85D8CE" : "white" }}>
             <CardContent>
               <CardTitle>{title}</CardTitle>
               {description}
@@ -122,6 +123,11 @@ class Task extends Component {
                 </TextField>
               </CardTitle>
               <TextField
+                multiline={true}
+                rows={4}
+                style={{
+                  width: "100%",
+                }}
                 value={this.state.description}
                 onChange={this.handelOnDescriptionChange}
               >
